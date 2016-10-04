@@ -1,0 +1,121 @@
+<!-- include the ilo core -->
+<script src="../ilo/core/ilo_object.js"></script>
+
+<!-- inclide any plugins you want to use -->
+<script src="../ilo/plugins/sort_model.js"></script>
+
+<!-- this is some demo code for the page using ilo methods -->
+<script src="push.js"></script>
+
+<style type="text/css">
+    .Active{
+        color: green;
+    }
+    
+    .Terminated{
+        color: red;
+    }
+</style>
+
+<!-- how to use the ilo filter tool -->
+<input 
+	name="search" 
+	type="text" 
+	onkeyup="
+		$ilo.tools.filter('myTable', [{field: 'name', query: 'IN', value: this.value}]);
+	" />
+
+<br />
+<br />
+<div id="panel_menu">
+	<table border="1" width="404">
+		<tr>
+			<th width="20">C</th>
+			<th><a href="JavaScript:void(0)" onclick="$ilo.plugin.sortModel('myTable', 'id');">ID</a></th>
+			<th><a href="JavaScript:void(0)" onclick="$ilo.plugin.sortModel('myTable', 'name');">Name</a></th>
+			<th><a href="JavaScript:void(0)" onclick="$ilo.plugin.sortModel('myTable', 'surname');">Surname</a></th>
+			<th><a href="JavaScript:void(0)" onclick="$ilo.plugin.sortModel('myTable', 'status');">Status</a></th>
+		</tr>
+		<tbody id="myTable">
+			<tr>
+				<td><input type="checkbox" onclick="setCheck(this, {{iloModelIndex}})" {{box}}/></td>
+				<td><a href="JavaScript: void(0);" onclick="openDialog({{iloModelIndex}})">{{id}}</a></td>
+				<td>{{name}}</td>
+				<td>{{surname}}</td>
+				<td>{{status}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<br />
+<div id="panel_window">
+	<div style="border:#000 solid 2px; width:320px; height:300px; padding:40px;">
+		<div style="border:#000 solid 2px; width:100%; height:200px; text-align:center;">
+            <img src="img/{{image}}" />
+		</div>
+		<div>
+			<br />
+			ID: {{id}}<br />
+			Name: {{name}} {{surname}}<br />
+			Status: <span class="{{status}}">{{status}}</span><br />
+			<div 
+				style="text-align:right; font:bold; color:red; text-decoration:underline; cursor:pointer;" 
+				onclick="document.getElementById('panel_window').innerHTML=''"
+			>Close</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- this is a comand that you can use to push a change to the view and you would put in a ajax call to the server -->
+<br /><br /><br />
+<h3>Example of a push function to update the view via the model</h3>
+<div>serverPush('myTable', '001', 'status', 'Terminated');</div>
+
+<script language="javascript">	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//             Create a data model - this can be created by ajax or php injection                  //
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	var testModel = [
+		{"id":"001","name":"Joe","surname":"Burns","status":"Active","image":"joes.png"},
+		{"id":"002","name":"Carole","surname":"Mattar","status":"Active","image":"caroles.png"},
+		{"id":"003","name":"John","surname":"Smith","status":"Active","image":"johns.png"},
+		{"id":"004","name":"Sarah","surname":"Jones","status":"Active","image":"sarahs.png"},
+		{"id":"005","name":"Tim","surname":"Johnson","status":"Active","image":"tim.png"},
+		{"id":"006","name":"Danny","surname":"Danger","status":"Active","image":"danny.png"},
+		{"id":"007","name":"Nathan","surname":"Holly","status":"Active","image":"nathan.png"},
+		{"id":"008","name":"James","surname":"McDonald","status":"Active","image":"jamesm.png"},
+		{"id":"009","name":"Peter","surname":"Handson","status":"Active","image":"perterh.png"},
+		{"id":"010","name":"Toby","surname":"Gibson","status":"Active","image":"toby.png"}
+	];
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//                                   Create the In Line Objects                                    //
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// create the ilo object
+    $ilo.tools.createObject({
+        id: 'myTable',
+		model: testModel
+    });
+	
+	// create the ilo object - this time we are extending the use of the model as it is in the myTable object
+    $ilo.tools.createObject({
+        id: 'panel_window',
+		modelExtend: "myTable"
+    });
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//                             Create DOM functions for the local code                             //
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// manage checked rows
+	var setCheck = function(obj, modelIndex){
+		$ilo.tools.getModelObject('myTable')[modelIndex].box=(obj.checked)?'checked':'';
+	}
+	
+	// view object
+	var openDialog = function(modelIndex){
+		var objectIndex = $ilo.tools.getObjectIndex('myTable');
+		$ilo.tools.attachModel('panel_window', [$ilo.objects[objectIndex].model[modelIndex]]);
+	}
+		
+</script>

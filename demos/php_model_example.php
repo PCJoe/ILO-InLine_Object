@@ -1,0 +1,82 @@
+<?php
+	class Model
+	{
+		static function getData()
+		{
+			$output = array(
+				array(
+					'id'=>'001',
+					'name'=>'Joe',
+					'surname'=>'Burns',
+					'status'=>'Active',
+					'image'=>'joes.png'
+				),
+				array(
+					'id'=>'002',
+					'name'=>'Carole',
+					'surname'=>'Mattar',
+					'status'=>'Active',
+					'image'=>'caroles.png'
+				),
+				array(
+					'id'=>'003',
+					'name'=>'John',
+					'surname'=>'Smith',
+					'status'=>'Active',
+					'image'=>'johns.png'
+				),
+				array(
+					'id'=>'004',
+					'name'=>'Sarah',
+					'surname'=>'Jones',
+					'status'=>'Active',
+					'image'=>'sarahs.png'
+				),
+				array(
+					'id'=>'005',
+					'name'=>'Tim',
+					'surname'=>'Johnson',
+					'status'=>'Active',
+					'image'=>'tim.png'
+				),
+				array(
+					'id'=>'006',
+					'name'=>'Danny',
+					'surname'=>'Danger',
+					'status'=>'Active',
+					'image'=>'danny.png'
+				),
+				array(
+					'id'=>'007',
+					'name'=>'Nathan',
+					'surname'=>'Holly',
+					'status'=>'Active',
+					'image'=>'nathan.png'
+				),
+				array(
+					'id'=>'008',
+					'name'=>'James',
+					'surname'=>'McDonald',
+					'status'=>'Active',
+					'image'=>'jamesm.png'
+				),
+				array(
+					'id'=>'009',
+					'name'=>'Peter',
+					'surname'=>'Handson',
+					'status'=>'Active',
+					'image'=>'perterh.png'
+				),
+				array(
+					'id'=>'010',
+					'name'=>'Toby',
+					'surname'=>'Gibson',
+					'status'=>'Active',
+					'image'=>'toby.png'
+				)
+			);
+			
+			return json_encode($output);
+		}
+	}
+?>
