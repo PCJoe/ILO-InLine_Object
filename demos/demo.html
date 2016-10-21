@@ -3,9 +3,10 @@
 
 <!-- inclide any plugins you want to use -->
 <script src="../ilo/plugins/sort_model.js"></script>
+<script src="../ilo/plugins/custom.js"></script>
 
 <!-- this is some demo code for the page using ilo methods -->
-<script src="push.js"></script>
+<script src="server.js"></script>
 
 <style type="text/css">
     .Active{
@@ -18,6 +19,9 @@
 </style>
 
 <!-- how to use the ilo filter tool -->
+<ul>
+  <li>This is a name filter, watch the table view automaticly change as you type. All in real time and in the browser.</li>
+</ul>
 <input 
 	name="search" 
 	type="text" 
@@ -27,6 +31,10 @@
 
 <br />
 <br />
+<ul>
+  <li>Click on the titles to sort the model in the front-end.</li>
+  <li>Click the ID to see a layer with details on that row</li>
+</ul>
 <div id="panel_menu">
 	<table border="1" width="404">
 		<tr>
@@ -66,11 +74,19 @@
 	</div>
 </div>
 
+<!-- this is a comand that you can use to push a change to the view and you could put in a ajax call to the server -->
+<h3>Example of a Update function to update the view via the model</h3>
+<ul>
+  <li>Click on the ID 001 to see both table and the layer view. Click the below to run a simply method to update the model and refresh any active views.</li>
+</ul>
+<div><a href="JavaScript:Void(0);" onClick="Server.Update('myTable', '001', 'status', 'Terminated');">Server.Update('myTable', '001', 'status', 'Terminated');</a></div>
 
-<!-- this is a comand that you can use to push a change to the view and you would put in a ajax call to the server -->
-<br /><br /><br />
-<h3>Example of a push function to update the view via the model</h3>
-<div>serverPush('myTable', '001', 'status', 'Terminated');</div>
+<!-- this is a comand that you can use to insert to the view and you could put in a ajax call to the server -->
+<h3>Example of a Insert function to update the view via the model</h3>
+<ul>
+  <li>Click the below to run a simply method to update the model and refresh any active views.</li>
+</ul>
+<div><a href="JavaScript:Void(0);" onClick="Server.Insert('myTable', {'id':'011','name':'Brian','surname':'Hawken','status':'Active','image':'joes.png'});">Server.Insert('myTable', {'id':'011','name':'Brian','surname':'Hawken','status':'Active','image':'joes.png'});</a></div>
 
 <script language="javascript">	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
